@@ -5,7 +5,7 @@ from fairseq.models import (
 from typing import Any, Dict, List, Optional, Tuple
 import torch
 from torch import Tensor
-from fairseq.models.speech_to_text.xstnet import XSTNet
+from fairseq.models.speech_to_text.xstnet import XSTNet, base_architecture
 from fairseq.models.fairseq_encoder import EncoderOut
 from fairseq.models.speech_to_text.s2t_transformer import TransformerDecoderScriptable
 from fairseq.modules.transformer_layer import TransformerDecoderLayer
@@ -405,3 +405,7 @@ class RepNetDecoderLayer(TransformerDecoderLayer):
                 self_attn_state = [saved_state["prev_key"], saved_state["prev_value"]]
             return x, attn, self_attn_state
         return x, attn, None
+
+@register_model_architecture('repnet', 'repnet')
+def base_architecture_repnet(args):
+    base_architecture(args)

@@ -1,1 +1,1 @@
-from multitask_rep import MultiTaskCrossEntropyWithContrastiveWithExtraMTRep
+from .multitask_rep import MultiTaskCrossEntropyWithContrastiveWithExtraMTRep
