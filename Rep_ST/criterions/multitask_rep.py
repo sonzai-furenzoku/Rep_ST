@@ -1,8 +1,10 @@
 from fairseq.criterions.multitask_crossentropy_with_contrastive_with_extra_mt import MultiTaskCrossEntropyWithContrastiveWithExtraMT
 from fairseq.criterions.label_smoothed_cross_entropy import label_smoothed_nll_loss
 from fairseq.criterions import register_criterion
+import torch
+from fairseq import metrics, utils
 
-@register_criterion('multitask_crossentropy_with_contrastive_with_extra_mt_rep')
+@register_criterion('multi_task_cross_entropy_with_contrastive_with_extra_mt_rep')
 class MultiTaskCrossEntropyWithContrastiveWithExtraMTRep(MultiTaskCrossEntropyWithContrastiveWithExtraMT):
     def compute_loss_asr(self, model, sample, reduce=True):
         net_output, _ = model(sample["net_input"]["src_tokens"],

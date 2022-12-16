@@ -44,7 +44,7 @@ class RepNetDecoder(TransformerDecoderScriptable):
         alignment_heads: Optional[int] = None,
         src_lengths: Optional[Any] = None,
         return_all_hiddens: bool = False,
-        task: Optional[str] = None,
+        task: Optional[str] = 'st',
     ):
         """
         Args:
@@ -85,17 +85,19 @@ class RepNetDecoder(TransformerDecoderScriptable):
         full_context_alignment: bool = False,
         alignment_layer: Optional[int] = None,
         alignment_heads: Optional[int] = None,
-        task: Optional[str] = None,
+        task: Optional[str] = 'st',
     ):
-        return self.extract_features_scriptable(
+        # call scriptable method from parent class
+        x, attn = self.extract_features_scriptable(
             prev_output_tokens,
             encoder_out,
             incremental_state,
             full_context_alignment,
             alignment_layer,
             alignment_heads,
-            task,
+            task=task
         )
+        return x, attn
 
     def extract_features_scriptable(
         self,
@@ -105,7 +107,7 @@ class RepNetDecoder(TransformerDecoderScriptable):
         full_context_alignment: bool = False,
         alignment_layer: Optional[int] = None,
         alignment_heads: Optional[int] = None,
-        task: Optional[str] = None,
+        task: Optional[str] = 'st',
     ):
         """
         Similar to *forward* but only return features.
@@ -260,7 +262,7 @@ class RepNetDecoderLayer(TransformerDecoderLayer):
         self_attn_padding_mask: Optional[torch.Tensor] = None,
         need_attn: bool = False,
         need_head_weights: bool = False,
-        task: str = 'asr',
+        task: str = 'st',
     ):
         """
         Args:

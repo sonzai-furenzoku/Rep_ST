@@ -31,7 +31,7 @@ fairseq-train $DATA_PATH \
     --optimizer adam --clip-norm 10.0 \
     --lr-scheduler inverse_sqrt --lr 1e-4  --warmup-updates 25000  --weight-decay 0.0 \
     \
-    --criterion multitask_crossentropy_with_contrastive_with_extra_mt_rep \
+    --criterion multi_task_cross_entropy_with_contrastive_with_extra_mt_rep \
     --label-smoothing 0.1 --ignore-prefix-size 1 --report-accuracy \
     --contrastive-weight 0.0 --contrastive-temperature 0.02 --contrastive-seqlen-type none \
     \
